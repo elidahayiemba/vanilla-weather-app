@@ -36,10 +36,19 @@ function displayTemperature(response){
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     )
 }
+function search(city){
+  let apiKey = "b98d12bde72f31eae25d84b6d0a808dd";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
+}
 
-let apiKey = "b98d12bde72f31eae25d84b6d0a808dd";
-let city = "Tokyo"
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+function handleSubmit(event){
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
 
-  
-  axios.get(apiUrl).then(displayTemperature)
+search("New York");
+
+  let form = document.querySelector("#search-form");
+  form.addEventListener("submit", handleSubmit);
