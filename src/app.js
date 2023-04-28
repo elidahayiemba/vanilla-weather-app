@@ -14,51 +14,6 @@ function formatDate(timestamp){
   return `${day} ${hours}:${minutes}`;
 
 }
-
-function displayForecast(response){
-  let forecastElement = document.querySelector("#forecast");
-
-  let forecastHTML = `<div class="row">`;
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue"]
-  days.forEach(function(day){
-    forecastHTML = 
-  forecastHTML + 
-  `
-  
-  <div class="col-2">
-      <div class="weather-forecast-date">${day}</div>
-      <img src="http://openweathermap.org/img/wn/01n@2x.png" alt="" width="42px">
-      <div class="weather-forecast-temperature">
-          <span class="max-temp">18°</span>
-          <span class="min-temp">12°</span>
-
-      </div>
-  </div>
-  `;  
-  });
-  
-
-forecastHTML = forecastHTML + `</div>`
-  forecastElement.innerHTML = forecastHTML;
-
-
-  
-}
-
-function getForecast(coordinates){
-  let apiKey = "b98d12bde72f31eae25d84b6d0a808dd";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
-
-
-}
-
-
-
-
-
-
-
 function displayTemperature(response){
     let temperatureElement = document.querySelector("#temperature");
     let cityElement = document.querySelector("#city");
@@ -80,8 +35,6 @@ function displayTemperature(response){
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
 
-  getForecast(response.data.coord);
-
 }
 function search(city){
   let apiKey = "b98d12bde72f31eae25d84b6d0a808dd";
@@ -95,9 +48,7 @@ function handleSubmit(event){
   search(cityInputElement.value);
 }
 
-
-search("New York");
-
+search("Nairobi");
 
 
   let form = document.querySelector("#search-form");
